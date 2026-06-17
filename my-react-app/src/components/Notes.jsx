@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 function Notes() {
-
+    const [update, setUpdate] = useState(false);
     const[inputValue, setInputValue] = useState("")
     const[note, setNote] = useState("");
 
@@ -18,7 +18,10 @@ function Notes() {
     }
 
     const handleUpdate = () => {
-
+        setUpdate(true);
+        update(setUpdate)
+        setNote(inputValue)
+        setInputValue("")
     }
 
   return (
@@ -37,14 +40,22 @@ function Notes() {
         <p>{note}</p> 
         {note ? <div>
             <button onClick={ handleDelete }>Delete</button> 
-            <button onClick={ handleUpdate }>Update</button> 
 
-            <input 
+
+            <button onClick={ handleUpdate }>Update</button> 
+            
+            {update ? <div>
+                <input 
                 type="text"
                 value={note}
                 onChange={(e) => setInputValue(e.target.value)}
                 defaultValue={note}
-            />
+            /> 
+
+            <button onClick={handleChange}>Save</button>
+
+            </div>
+        : <></>}
 
         </div>: <></> }
 
